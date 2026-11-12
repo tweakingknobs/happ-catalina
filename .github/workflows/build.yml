@@ -11,22 +11,20 @@ jobs:
     runs-on: macos-15
 
     steps:
-      - name: Checkout source
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Build application
+      - name: Build
         run: |
           chmod +x Scripts/build.sh
           ./Scripts/build.sh
 
-      - name: Package application
+      - name: Package
         run: |
-          ditto -c -k --sequesterRsrc --keepParent \
-            build/VPN.app VPN-Catalina.zip
+          ditto -c -k --keepParent build/VPN.app Happ-Catalina.zip
 
-      - name: Upload application
+      - name: Upload
         uses: actions/upload-artifact@v4
         with:
           name: Happ-Catalina
-          path: VPN-Catalina.zip
-          retention-days: 7
+          path: Happ-Catalina.zip
